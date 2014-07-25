@@ -1,29 +1,31 @@
 /**
- * @author John Wrobel and Thomas Lee "Bitch don't kill my vibe";
+ * @author John Wrobel and Thomas Lee
  * @date 7/23/2014
- * @version 1.4
- * I'm debating whether or not to add a size()
+ * @version 2.0
  */
 
 
 public class BTree {
 	public static void main(String[] args) {
-		//Testing a tree with a single full node
-		BTree tree = new BTree();
-		
-		tree.insert(10);
-		tree.insert(20);
-		tree.insert(15);
-		
-		System.out.println("First Tree: Insert 3");
-		preorder(tree.root);
-		System.out.println();
 		
 		//Testing isEmpty() on the same tree
+		BTree tree = new BTree();
+		tree.insert(10);
 		System.out.println("Testing isEmpty() on a non-empty tree. Should show false.");
 		System.out.println(tree.isEmpty());
 		System.out.println();
 		
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		
+		//Testing isEmpty() on an empty tree
+		BTree emptyTree = new BTree();
+		System.out.println("Testing isEmpty() on empty tree. Should show true.");
+		System.out.println(emptyTree.isEmpty());
+		System.out.println();
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+		System.out.println("Testing insert with several nodes");
 		//Testing a tree with several nodes
 		BTree tree1 = new BTree();
 		tree1.insert(10);
@@ -38,6 +40,8 @@ public class BTree {
 		preorder(tree1.root);
 		System.out.println();
 		
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("Testing remove");
 		//Testing remove()
 		BTree tree2 = new BTree();
 		tree2.insert(10);
@@ -52,26 +56,109 @@ public class BTree {
 		
 		tree2.remove(20);
 		tree2.remove(5);
-		tree2.remove(45);
-		System.out.println("Third Tree: 9 values inserted, 3 values deleted");
+		System.out.println("Third Tree: 9 values inserted, 2 values deleted");
 		preorder(tree2.root);
 		System.out.println();
 		
-		//Testing isEmpty() on an empty tree
-		BTree emptyTree = new BTree();
-		System.out.println("Testing isEmpty() on empty tree. Should show true.");
-		System.out.println(emptyTree.isEmpty());
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("Testing remove when the value doesn't exist in the tree");
+		//Testing remove()
+		BTree tree3 = new BTree();
+		tree3.insert(10);
+		tree3.insert(20);
+		tree3.insert(15);
+		tree3.insert(5);
+		tree3.insert(25);
+		tree3.insert(30);
+		tree3.insert(50);
+		tree3.insert(100);
+		tree3.insert(200);
+		System.out.println("remove(500); remove(17);");
+		tree3.remove(500);
+		tree3.remove(17);
+		System.out.println("Third Tree: 9 values inserted, 0 values deleted");
+		preorder(tree3.root);
 		System.out.println();
 		
-		//Testing clear() on a multi-node tree
-		BTree testClear = new BTree();
-		testClear.insert(5);
-		testClear.insert(3);
-		testClear.insert(8);
-		testClear.insert(10);
-		testClear.clear();
-		System.out.println("Testing clear(). Should show true.");
-		System.out.println(testClear.isEmpty());
+		
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		//Testing a tree with a single full node
+				System.out.println("Testing insert and remove");
+				System.out.println("");
+				BTree tree5 = new BTree();
+				System.out.println("insert(10);");
+				tree5.insert(10);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+
+				System.out.println("insert(20);");
+				tree5.insert(20);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+
+				System.out.println("insert(15);");
+				tree5.insert(15);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("insert(5);");
+				tree5.insert(5);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("insert(50);");
+				tree5.insert(50);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("insert(100);");
+				tree5.insert(100);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("remove(10);");
+				tree5.remove(10);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("remove(50);");
+				tree5.remove(50);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("remove(15); //Testing remove root");
+				tree5.remove(15);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("insert(10);");
+				tree5.insert(10);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("remove(100); //Testing handleUnderFlow");
+				tree5.remove(100);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("remove(5); //Testing handleUnderFlow");
+				tree5.remove(5);
+				preorder(tree5.root);
+				System.out.println("Size: " + tree5.size());
+				System.out.println("---------------");
+				
+				System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 		//Testing a tree. This shows how insertion works and how the structure develops
 		System.out.println();
@@ -94,16 +181,15 @@ public class BTree {
 		tree4.insert(5);
 		System.out.println("-------------");
 		preorder(tree4.root);
-		
-		//We still need a test for adding, then removing, then adding again
-		//other than that I think we're good, unless we decide to make a size(), in which case we should test that too
 	}
 	
 	public Node root;
 	private Node lastVisited;
+	private int size;
 	
 	public BTree() {
 		this.root = null;
+		this.size = 0;
 	}
 	
 	public boolean isEmpty() { //to test this make a new BTree and then call it
@@ -160,7 +246,7 @@ public class BTree {
 		if (p.dataArray[0] == 0) { //if p is empty
 			handleUnderflow(p , null);
 		}
-		
+		size--;
 		return returnValue;
 	}
 	
@@ -325,6 +411,7 @@ public class BTree {
 			temp.dataArray[0] = data;
 			temp.parent = temp;
 			root = temp;
+			size++;
 			return -1; //normally you'd return null but you can't since ints are a thing
 		}
 		int tempInt = dataSearch(data); //although this and the next if statement seem useless
@@ -336,6 +423,7 @@ public class BTree {
 		}
 		
 		insertionHelper(data, null, lastVisited);
+		size++;
 		return -1; //data didn't previously exist
 	}
 	
@@ -438,6 +526,10 @@ public class BTree {
 		}
 	}
 	
+	public int size() {
+		return size;
+	}
+	
 	private class Node {
 		public int[] dataArray;
 		public Node[] childArray;
@@ -453,8 +545,13 @@ public class BTree {
 			StringBuilder returnString = new StringBuilder(); //using StringBuilder for fastest possible running time
 			
 			for (int i = 0; i < 3; i++) {
-				returnString.append(dataArray[i]);
-				returnString.append(" ");
+				if (dataArray[i] == 0) {
+					returnString.append("_");
+					returnString.append(" ");
+				} else {
+					returnString.append(dataArray[i]);
+					returnString.append(" ");
+				}
 			}
 			
 			return returnString.toString();
